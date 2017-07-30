@@ -1,1 +1,9 @@
-{}
+{
+  "ZPSoapDS": {
+    "url": "https://www.zarinpal.com/pg/services/WebGate/service",
+    "name": "ZPSoapDS",
+    "wsdl": "https://www.zarinpal.com/pg/services/WebGate/wsdl",
+    "remotingEnabled": true,
+    "connector": "soap"
+  }
+}

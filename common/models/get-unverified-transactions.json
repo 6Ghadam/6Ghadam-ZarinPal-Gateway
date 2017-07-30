@@ -1,0 +1,21 @@
+{
+  "name": "GetUnverifiedTransactions",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": "false",
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "MerchantID": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

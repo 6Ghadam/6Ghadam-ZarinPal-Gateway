@@ -1,0 +1,20 @@
+{
+  "name": "soap_PaymentGatewayImplementationServiceBinding",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "http": {
+    "path": "PaymentGatewayImplementationServiceBinding"
+  },
+  "forceId": "false",
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

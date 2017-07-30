@@ -1,0 +1,24 @@
+{
+  "name": "GetUnverifiedTransactionsResponse",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": "false",
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "Status": {
+      "type": "number"
+    },
+    "Authorities": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

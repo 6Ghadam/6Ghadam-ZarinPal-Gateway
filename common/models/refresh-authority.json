@@ -1,0 +1,27 @@
+{
+  "name": "RefreshAuthority",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": "false",
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "MerchantID": {
+      "type": "string"
+    },
+    "Authority": {
+      "type": "string"
+    },
+    "ExpireIn": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

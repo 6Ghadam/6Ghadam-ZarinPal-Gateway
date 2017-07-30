@@ -1,0 +1,36 @@
+{
+  "name": "PaymentRequest",
+  "base": "Model",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "forceId": "false",
+  "excludeBaseProperties": [
+    "id"
+  ],
+  "properties": {
+    "MerchantID": {
+      "type": "string"
+    },
+    "Amount": {
+      "type": "number"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "Mobile": {
+      "type": "string"
+    },
+    "CallbackURL": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
