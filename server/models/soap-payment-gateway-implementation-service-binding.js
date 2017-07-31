@@ -96,25 +96,23 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
               return callback(null, JSON.parse(body))
             })
           }
-          if (response.status === 'OK') {
-            var url = ''
-            var data = {
-              "time": Math.floor((new Date).getTime()),
-              "price": PaymentVerification.Amount,
-              "status": 'Seccessful',
-              "receiptInfo": result,
-              "clientId": result.Description.clientId,
-              "packageId": result.Description.packageId
-            }
-            requestToBackend(url, "POST", data, function (err, result) {
-              if (err)
-                return callback(err, null)
-              return callback(err, response)
-            })
-          } else {
-            var result = response;
-            callback(err, result);
+          var url = 'http://0.0.0.0:4000/api/transactions'
+          var status = 'Seccessful'
+          if (response.status === 'NOK') 
+            status = 'Failed'
+          var data = {
+            "time": Math.floor((new Date).getTime()),
+            "price": PaymentVerification.Amount,
+            "status": status,
+            "receiptInfo": result,
+            "clientId": result.Description.clientId,
+            "packageId": result.Description.packageId
           }
+          requestToBackend(url, "POST", data, function (err, result) {
+            if (err)
+              return callback(err, null)
+            return callback(err, response)
+          })
         })
       })
     });
