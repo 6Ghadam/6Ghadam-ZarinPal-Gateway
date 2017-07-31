@@ -64,5 +64,9 @@
   "RefreshAuthorityResponse": {
     "dataSource": null,
     "public": true
+  },
+  "transaction": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

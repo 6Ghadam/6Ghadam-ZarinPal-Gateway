@@ -1,0 +1,54 @@
+{
+  "name": "transaction",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "MerchantID": {
+      "type": "string",
+      "required": true
+    },
+    "Amount": {
+      "type": "number",
+      "required": true
+    },
+    "Description": {
+      "type": "object",
+      "required": true
+    },
+    "Email": {
+      "type": "string",
+      "required": false
+    },
+    "Mobile": {
+      "type": "string",
+      "required": false
+    },
+    "CallbackURL": {
+      "type": "string",
+      "required": false
+    },
+    "Status": {
+      "type": "number",
+      "required": true
+    },
+    "VerificationStatus": {
+      "type": "string",
+      "required": true
+    },
+    "Authority": {
+      "type": "string",
+      "required": true
+    },
+    "RefID": {
+      "type": "string",
+      "required": false
+    }    
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
