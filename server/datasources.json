@@ -5,5 +5,13 @@
     "wsdl": "https://www.zarinpal.com/pg/services/WebGate/wsdl",
     "remotingEnabled": true,
     "connector": "soap"
+  },
+  "mongoDs": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "",
+    "database": "copa90DB",
+    "name": "mongoDs",
+    "connector": "mongodb"
   }
 }
