@@ -36,7 +36,8 @@
     },
     "VerificationStatus": {
       "type": "string",
-      "required": false
+      "required": false,
+      "default": "nothing"
     },
     "Authority": {
       "type": "string",
@@ -44,7 +45,8 @@
     },
     "RefID": {
       "type": "string",
-      "required": false
+      "required": false,
+      "default": "0"
     }    
   },
   "validations": [],

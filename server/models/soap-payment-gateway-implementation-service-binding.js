@@ -72,9 +72,8 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
         transactionInst[0].updateAttributes(data, function (err, result) {
           if (err)
             return callback(err, null)
-
+          console.log(JSON.stringify(result))
           var request = require('request')
-
           function requestToBackend(url, verb, payload, cb) {
             var options = {
               method: verb,
@@ -88,6 +87,8 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
               body: JSON.stringify(payload)
             }
             request(options, function (error, response, body) {
+              console.log(err)
+              console.log(body)
               if (error || response.statusCode >= 400)
                 return cb(error, null)
               console.log(response)
@@ -96,7 +97,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
           }
           var url = 'http://0.0.0.0:4000/api/transactions'
           var status = 'Seccessful'
-          if (response.Status === 'NOK') 
+          if (Number(response.Status) >= 100) 
             status = 'Failed'
           var data = {
             "time": Math.floor((new Date).getTime()),
@@ -107,6 +108,8 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
             "packageId": result.Description.packageId
           }
           requestToBackend(url, "POST", data, function (err, result) {
+            console.log(err)
+            console.log(result)
             if (err)
               return callback(err, null)
             return callback(null, response)
