@@ -62,9 +62,9 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
   PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification = function (PaymentVerification, callback) {
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification(PaymentVerification, function (err, response) {
       var transaction = server.models.transaction
-      transaction.find({
+      transaction.find({'where':{
         'Authority': PaymentVerification.Authority
-      }, function (err, transactionInst) {
+      }}, function (err, transactionInst) {
         if (err)
           return callback(err, null)
         var data = {

@@ -1,6 +1,6 @@
 {
   "name": "transaction",
-  "base": "Model",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
