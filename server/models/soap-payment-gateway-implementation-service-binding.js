@@ -61,6 +61,9 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
    */
   PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification = function (PaymentVerification, callback) {
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification(PaymentVerification, function (err, response) {
+      if (Number(response.Status) == 101)
+        return callback(null, response)
+
       var transaction = server.models.zptransaction
       transaction.find({'where':{'Authority': PaymentVerification.Authority}}, function (err, transactionInst) {
         if (err)
@@ -69,12 +72,16 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
           "VerificationStatus": response.status,
           "RefId": response.RefId
         }
+        if (transactionInst[0].RefId !== '0')
+          return callback(err, null)
+
         transactionInst[0].updateAttributes(data, function (err, result) {
           if (err)
             return callback(err, null)
           console.log(JSON.stringify(result))
           var request = require('request')
           function requestToBackend(url, verb, payload, cb) {
+            console.log(JSON.stringify(payload))
             var options = {
               method: verb,
               url: url,
@@ -97,7 +104,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
           }
           var url = 'http://0.0.0.0:4000/api/transactions'
           var status = 'Successful'
-          if (Number(response.Status) >= 100) 
+          if (Number(response.Status) <= 0) 
             status = 'Failed'
           var data = {
             "time": Math.floor((new Date).getTime()),
