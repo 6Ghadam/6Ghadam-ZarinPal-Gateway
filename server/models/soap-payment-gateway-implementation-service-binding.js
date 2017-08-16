@@ -62,16 +62,14 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
   PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification = function (PaymentVerification, callback) {
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification(PaymentVerification, function (err, response) {
       var transaction = server.models.zptransaction
-      transaction.find({'where':{
-        'Authority': PaymentVerification.Authority
-      }}, function (err, transactionInst) {
+      transaction.find({'where':{'Authority': PaymentVerification.Authority}}, function (err, transactionInst) {
         if (err)
           return callback(err, null)
         var data = {
           "VerificationStatus": response.status,
           "RefId": response.RefId
         }
-        transactionInst.updateAttributes(data, function (err, result) {
+        transactionInst[0].updateAttributes(data, function (err, result) {
           if (err)
             return callback(err, null)
 
@@ -98,7 +96,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
           }
           var url = 'http://0.0.0.0:4000/api/transactions'
           var status = 'Seccessful'
-          if (response.status === 'NOK') 
+          if (response.Status === 'NOK') 
             status = 'Failed'
           var data = {
             "time": Math.floor((new Date).getTime()),
