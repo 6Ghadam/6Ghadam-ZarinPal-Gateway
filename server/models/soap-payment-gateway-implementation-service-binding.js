@@ -63,25 +63,21 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification(PaymentVerification, function (err, response) {
       if (Number(response.Status) == 101)
         return callback(null, response)
-
       var transaction = server.models.zptransaction
       transaction.find({'where':{'Authority': PaymentVerification.Authority}}, function (err, transactionInst) {
         if (err)
           return callback(err, null)
         var data = {
-          "VerificationStatus": response.status,
-          "RefId": response.RefId
+          "VerificationStatus": response.Status.toString(),
+          "RefID": response.RefID.toString()
         }
-        if (transactionInst[0].RefId !== '0')
+        if (transactionInst[0].RefID !== '0')
           return callback(err, null)
-
         transactionInst[0].updateAttributes(data, function (err, result) {
           if (err)
             return callback(err, null)
-          console.log(JSON.stringify(result))
           var request = require('request')
           function requestToBackend(url, verb, payload, cb) {
-            console.log(JSON.stringify(payload))
             var options = {
               method: verb,
               url: url,
@@ -102,7 +98,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
               return cb(null, JSON.parse(body))
             })
           }
-          var url = 'http://0.0.0.0:4000/api/transactions'
+          var url = 'http://185.105.186.68:4000/api/transactions'
           var status = 'Successful'
           if (Number(response.Status) <= 0) 
             status = 'Failed'
@@ -115,8 +111,6 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
             "packageId": result.Description.packageId
           }
           requestToBackend(url, "POST", data, function (err, result) {
-            console.log(err)
-            console.log(result)
             if (err)
               return callback(err, null)
             return callback(null, response)
