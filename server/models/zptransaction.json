@@ -1,5 +1,5 @@
 {
-  "name": "transaction",
+  "name": "zptransaction",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {

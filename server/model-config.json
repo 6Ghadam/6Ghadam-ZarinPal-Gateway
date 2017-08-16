@@ -65,7 +65,7 @@
     "dataSource": null,
     "public": true
   },
-  "transaction": {
+  "zptransaction": {
     "dataSource": "mongoDs",
     "public": true
   }

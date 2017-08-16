@@ -20,11 +20,11 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
    */
   PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentRequest = function (PaymentRequest, callback) {
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentRequest(PaymentRequest, function (err, response) {
-      var transaction = server.models.transaction
+      var transaction = server.models.zptransaction
       var data = {
         "MerchantID": PaymentRequest.MerchantID,
         "Amount": PaymentRequest.Amount,
-        "Description": PaymentRequest.Description,
+        "Description": JSON.parse(PaymentRequest.Description),
         "Email": PaymentRequest.Email,
         "Mobile": PaymentRequest.Mobile,
         "CallbackURL": PaymentRequest.CallbackURL,
@@ -61,7 +61,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
    */
   PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification = function (PaymentVerification, callback) {
     PaymentGatewayImplementationServicePaymentGatewayImplementationServiceBinding.PaymentVerification(PaymentVerification, function (err, response) {
-      var transaction = server.models.transaction
+      var transaction = server.models.zptransaction
       transaction.find({'where':{
         'Authority': PaymentVerification.Authority
       }}, function (err, transactionInst) {
@@ -77,7 +77,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
 
           var request = require('request')
 
-          function requestToBackend(url, verb, payload, callback) {
+          function requestToBackend(url, verb, payload, cb) {
             var options = {
               method: verb,
               url: url,
@@ -89,11 +89,11 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
               },
               body: JSON.stringify(payload)
             }
-
             request(options, function (error, response, body) {
               if (error || response.statusCode >= 400)
-                return callback(error, null)
-              return callback(null, JSON.parse(body))
+                return cb(error, null)
+              console.log(response)
+              return cb(null, JSON.parse(body))
             })
           }
           var url = 'http://0.0.0.0:4000/api/transactions'
@@ -111,7 +111,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
           requestToBackend(url, "POST", data, function (err, result) {
             if (err)
               return callback(err, null)
-            return callback(err, response)
+            return callback(null, response)
           })
         })
       })
