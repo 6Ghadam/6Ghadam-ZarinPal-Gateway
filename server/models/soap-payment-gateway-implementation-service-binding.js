@@ -96,7 +96,7 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
             })
           }
           var url = 'http://0.0.0.0:4000/api/transactions'
-          var status = 'Seccessful'
+          var status = 'Successful'
           if (Number(response.Status) >= 100) 
             status = 'Failed'
           var data = {
