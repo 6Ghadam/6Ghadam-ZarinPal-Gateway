@@ -1,2 +1,2 @@
-# Copa90-ZarinPalGateway
+# 6Ghadam-ZarinPal-Gateway
 Zarin Pal SOAP Gateway to REST

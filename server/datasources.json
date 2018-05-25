@@ -10,7 +10,7 @@
     "host": "localhost",
     "port": 27017,
     "url": "",
-    "database": "copa90DB",
+    "database": "6GhadamZarinPalDB",
     "name": "mongoDs",
     "connector": "mongodb"
   }
