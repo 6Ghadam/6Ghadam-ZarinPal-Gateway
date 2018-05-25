@@ -98,7 +98,10 @@ module.exports = function (PaymentGatewayImplementationServicePaymentGatewayImpl
               return cb(null, JSON.parse(body))
             })
           }
-          var url = 'http://185.105.186.68:4000/api/transactions'
+          var conf = require('../config.json')
+          var url = conf.coreURL.dev
+          if (process.env === 'production')
+            url = conf.coreURL.prod
           var status = 'Successful'
           if (Number(response.Status) <= 0) 
             status = 'Failed'
